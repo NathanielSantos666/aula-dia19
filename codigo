@@ -1,0 +1,38 @@
+import * as leitor from "readline-sync"
+
+export class Medicamento {
+    nome: String;
+    quantidadeEstoque: number;
+    precoPorUnid: number;
+
+    constructor(nome: String, quantidadeEstoque: number, precoPorUnid: number) {
+        this.nome = nome;
+        this.quantidadeEstoque = quantidadeEstoque;
+        this.precoPorUnid = precoPorUnid;
+    }
+    
+}
+
+class Farmacia {
+    medicamentos: Array<object>
+
+    constructor(medicamentos: Array<object>) {
+        this.medicamentos = [];
+    }
+
+    addMedic() {
+        let nome = leitor.question("Insira o nome do medicamento que deseja adicionar ao estoque: ")
+        let quantidadeEstoque = leitor.question("Insira a quantidade que deseja adicionar ao estoque: ")
+        let precoPorUnid = leitor.question("Insira o valor que deseja colocar no medicamento: ")
+        let medicamento = new Medicamento(nome, quantidadeEstoque, precoPorUnid);
+        this.medicamentos.push(medicamento)
+        console.log(`${medicamento} adicionado ao estoque com sucesso.`)
+    }
+
+    removeMedic() {
+        let medic = leitor.question("Insira o index do medicamento que deseja remover do estoque: ")
+        this.medicamentos = this.medicamentos.filter(medicamento => medicamento.nome !== medic)
+        console.log(`${medic} removido do estoque com sucesso.`)
+    }
+
+}
